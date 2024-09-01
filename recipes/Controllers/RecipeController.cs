@@ -23,7 +23,8 @@ namespace recipes.Controllers
 
 		public IActionResult Index()
 		{
-			return View();
+			return View(_recipes);
 		}
+
 	}
 }
