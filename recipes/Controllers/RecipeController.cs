@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using recipes.Models;
+using recipes.Models.ViewModel;
 
 namespace recipes.Controllers
 {
@@ -29,8 +30,30 @@ namespace recipes.Controllers
 		}
 
 
+		public IActionResult CraeteRecipe()
+		{
+			var myRecipe = new RecipeView();
+			return View(myRecipe);
+		}
 
-		public IActionResult DeleteRecipe(int id)
+		[HttpPost]
+        public IActionResult CraeteRecipe(RecipeView recipe)
+        {
+			var myRecipe = new Recipe
+			{
+				id = _Id++,
+				name = recipe.name,
+				Ingredients = new List<string> { recipe.Ingredients } ,
+				Phases = new List<string> { recipe.Phases }
+			};
+
+            _recipes.Add(myRecipe);
+
+            return RedirectToAction("Index");
+        }
+
+
+        public IActionResult DeleteRecipe(int id)
 		{
 			var myRecipe = _recipes.FirstOrDefault(recipe => recipe.id == id);
 			if (myRecipe == null)
