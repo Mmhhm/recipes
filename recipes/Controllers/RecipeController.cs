@@ -62,6 +62,25 @@ namespace recipes.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult EditRecipe(int id)
+        {
+			return View(_recipes.FirstOrDefault(recipe => recipe.id == id));
+        }
+
+		[HttpPost]
+
+        public IActionResult EditRecipe(int id, Recipe recipe)
+        {
+			Recipe? currRecipe = _recipes.FirstOrDefault(recipe => recipe.id == id); 
+			if (currRecipe == null) { return RedirectToAction("Index"); }
+            
+			currRecipe.name = recipe.name;
+			currRecipe.Ingredients = recipe.Ingredients;
+            currRecipe.Phases = recipe.Phases;	
+
+            return RedirectToAction("Index");
+        }
+
 
 
         public IActionResult DeleteRecipe(int id)

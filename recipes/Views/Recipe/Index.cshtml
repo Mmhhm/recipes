@@ -13,7 +13,7 @@
 </form>
 
 <p>
-    <a asp-action="CraeteRecipe">Create New</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -46,7 +46,7 @@
                     @item.Phases.Count
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Edit", "EditRecipe", new { id = item.id }) |
                     @Html.ActionLink("Details", "Details", new { id = item.id }) |
                     @Html.ActionLink("Delete", "DeleteRecipe", new { id = item.id })
                 </td>
