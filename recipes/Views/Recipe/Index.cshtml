@@ -14,6 +14,7 @@
         <tr>
             <th>Recipe Name</th>
             <th> Number of Ingredients</th>
+            <th> Number of Phases</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -34,6 +35,9 @@
                 </td>
                 <td>
                     @item.Ingredients.Count
+                </td>
+                <td>
+                    @item.Phases.Count
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
