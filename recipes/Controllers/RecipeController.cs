@@ -29,6 +29,7 @@ namespace recipes.Controllers
 		}
 
 
+
 		public IActionResult DeleteRecipe(int id)
 		{
 			var myRecipe = _recipes.FirstOrDefault(recipe => recipe.id == id);
@@ -39,6 +40,7 @@ namespace recipes.Controllers
 			_recipes.Remove(myRecipe);
 			return RedirectToAction("Index");
 		}
+
 
 	}
 }
