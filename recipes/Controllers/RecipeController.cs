@@ -13,9 +13,9 @@ namespace recipes.Controllers
 			{
 				_recipes.Add(new Recipe
 				{
-					
+
 					id = _Id++,
-					name = "coppee cup",
+					name = "coffee cup",
 					Ingredients = new List<string> { "sugar", "coffee", "hot Water", "milk" },
 					Phases = new List<string> { "1. add two spoon of sugar to the cup", "2. add one spoon of coffee to the cup", "3. boil hot water and fill the cup", "4. add milk and drink!" }
 				});
