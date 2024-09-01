@@ -7,12 +7,14 @@
 <h1>Recipe List</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Craete">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>Recipe Name</th>
+            <th> Number of Ingredients</th>
+            <th> Number of Phases</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -30,6 +32,12 @@
                     {
                         <em>No name provided</em>
                     }
+                </td>
+                <td>
+                    @item.Ingredients.Count
+                </td>
+                <td>
+                    @item.Phases.Count
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "EditRecipe", new { id = item.id }) |
