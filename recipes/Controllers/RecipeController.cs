@@ -87,9 +87,16 @@ namespace recipes.Controllers
             return View(recipes.ToList());
         }
 
-
-
-
+		public IActionResult Details(int id)
+		{
+			var myRecipe = _recipes.FirstOrDefault(recipe => recipe.id == id);
+			if (myRecipe == null)
+			{
+				return NotFound();
+			}
+			var recipe = new List<Recipe> { myRecipe };
+			return View(recipe);
+		}
     }
 }
 
