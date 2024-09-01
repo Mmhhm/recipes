@@ -36,21 +36,32 @@ namespace recipes.Controllers
 			return View(myRecipe);
 		}
 
-		[HttpPost]
+        [HttpPost]
         public IActionResult CraeteRecipe(RecipeView recipe)
         {
-			var myRecipe = new Recipe
-			{
-				id = _Id++,
-				name = recipe.name,
-				Ingredients = new List<string> { recipe.Ingredients } ,
-				Phases = new List<string> { recipe.Phases }
-			};
+            var ingredientsList = recipe.Ingredients?
+                .Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(i => i.Trim())
+                .ToList();
+
+            var phasesList = recipe.Phases?
+                .Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(p => p.Trim())
+                .ToList();
+
+            var myRecipe = new Recipe
+            {
+                id = _Id++,
+                name = recipe.name,
+                Ingredients = ingredientsList ?? new List<string>(),
+                Phases = phasesList ?? new List<string>()
+            };
 
             _recipes.Add(myRecipe);
 
             return RedirectToAction("Index");
         }
+
 
 
         public IActionResult DeleteRecipe(int id)
@@ -63,9 +74,22 @@ namespace recipes.Controllers
 			_recipes.Remove(myRecipe);
 			return RedirectToAction("Index");
 		}
+        [HttpGet]       
+        public IActionResult Index(string searchString)
+        {
+            var recipes = _recipes.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                recipes = recipes.Where(r => r.name.Contains(searchString, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return View(recipes.ToList());
+        }
 
 
 
-	}
+
+    }
 }
 
